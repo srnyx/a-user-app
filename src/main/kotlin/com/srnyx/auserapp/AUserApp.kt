@@ -29,5 +29,14 @@ object AUserApp {
         }
 
         LOGGER.info { "A User App has finished starting!" }
+
+        // Stop app if "stop" is entered
+        while (true) {
+            val input = readlnOrNull() ?: continue
+            if (input == "stop") {
+                LOGGER.info { "Stopping the bot..." }
+                exitProcess(0)
+            }
+        }
     }
 }
