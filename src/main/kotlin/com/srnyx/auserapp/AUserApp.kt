@@ -21,6 +21,7 @@ object AUserApp {
             BotCommands.create {
                 addPredefinedOwners(Config.instance.owner)
                 addSearchPath("com.srnyx.auserapp")
+                applicationCommands { fileCache(Path("var/tmp/BotCommands")) }
                 textCommands { enable = false }
             }
         } catch (e: Exception) {
