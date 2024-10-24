@@ -8,3 +8,4 @@ build/
 # App
 /config.yml
 logs/
+var/
