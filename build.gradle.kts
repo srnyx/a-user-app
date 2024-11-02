@@ -12,7 +12,7 @@ plugins {
     id("dev.reformator.stacktracedecoroutinator") version "2.4.5"
 }
 
-setupJava("com.srnyx", "0.0.1", "A simple Discord user app")
+setupJava("com.srnyx", "1.0.0", "A simple Discord user app")
 setMainClass("com.srnyx.auserapp.AUserApp")
 
 repository(Repository.MAVEN_CENTRAL, Repository.JITPACK)
