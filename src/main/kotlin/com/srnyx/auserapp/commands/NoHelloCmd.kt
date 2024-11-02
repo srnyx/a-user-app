@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.interactions.InteractionContextType
 @Command
 class NoHelloCmd: ApplicationCommand() {
     @JDASlashCommand(
-        name = "no_hello",
+        name = "nohello",
         description = "Sends the nohello.net website")
     @TopLevelSlashCommandData(
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],

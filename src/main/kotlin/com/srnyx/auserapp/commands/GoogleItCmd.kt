@@ -16,7 +16,7 @@ import java.net.URLEncoder
 @Command
 class GoogleItCmd: ApplicationCommand() {
     @JDASlashCommand(
-        name = "google_it",
+        name = "googleit",
         description = "Generates a Google query link")
     @TopLevelSlashCommandData(
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
