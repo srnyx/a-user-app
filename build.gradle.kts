@@ -8,7 +8,7 @@ plugins {
     application
     kotlin("jvm")
     id("xyz.srnyx.gradle-galaxy") version "1.3.2"
-    id("io.github.goooler.shadow") version "8.1.8"
+    id("com.gradleup.shadow") version "8.3.5"
     id("dev.reformator.stacktracedecoroutinator") version "2.4.5"
 }
 
