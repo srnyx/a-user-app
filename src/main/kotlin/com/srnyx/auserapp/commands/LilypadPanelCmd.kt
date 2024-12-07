@@ -32,7 +32,6 @@ class LilypadPanelCmd: ApplicationCommand() {
     companion object {
         fun getEmbed(): MessageEmbed = EmbedBuilder()
             .setColor(0xAAD28A)
-            .setTitle("Lilypad Panel Request")
             .setDescription(":wave: **Hi there!** In order to assist you, we require a link to your server's panel/dashboard\nPlease send it in a ticket or DMs, thanks!")
             .addField("Example", "https://panel.lilypad.gg/server/by2qft6p", true)
             .setFooter("Lilypad", "https://us-east-1.tixte.net/uploads/cdn.venox.network/lilypad.gif")
