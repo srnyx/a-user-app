@@ -35,6 +35,7 @@ class LilypadPanelCmd: ApplicationCommand() {
             .setDescription(":wave: **Hi there!** In order to assist you, we require a link to your server's panel/dashboard\nPlease send it in a ticket or DMs, thanks!")
             .addField("Example", "https://panel.lilypad.gg/server/by2qft6p", true)
             .setFooter("Lilypad", "https://us-east-1.tixte.net/uploads/cdn.venox.network/lilypad.gif")
+            .setImage("https://i.imgur.com/ult4czh.png")
             .build()
     }
 }
