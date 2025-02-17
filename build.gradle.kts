@@ -11,7 +11,7 @@ plugins {
     id("dev.reformator.stacktracedecoroutinator") version "2.4.5"
 }
 
-setupLazyLibrary("d7be3bbaaf", "5.3.0", "com.srnyx", "1.0.0", "A simple Discord user app")
+setupLazyLibrary("5bd2c16374", "5.3.0", "com.srnyx", "1.0.0", "A simple Discord user app")
 
 repository(Repository.MAVEN_CENTRAL, Repository.JITPACK)
 dependencies {
