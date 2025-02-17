@@ -1,6 +1,6 @@
 import xyz.srnyx.gradlegalaxy.enums.Repository
 import xyz.srnyx.gradlegalaxy.enums.repository
-import xyz.srnyx.gradlegalaxy.utility.setupJda
+import xyz.srnyx.gradlegalaxy.utility.setupLazyLibrary
 
 
 plugins {
@@ -11,7 +11,7 @@ plugins {
     id("dev.reformator.stacktracedecoroutinator") version "2.4.5"
 }
 
-setupJda("5.3.0", "com.srnyx", "1.0.0", "A simple Discord user app")
+setupLazyLibrary("7123f8a1df", "5.3.0", "com.srnyx", "1.0.0", "A simple Discord user app")
 
 repository(Repository.MAVEN_CENTRAL, Repository.JITPACK)
 dependencies {
@@ -23,14 +23,4 @@ dependencies {
     implementation("ch.qos.logback", "logback-classic", "1.5.16")
 }
 
-kotlin {
-    jvmToolchain(21)
-}
-
-// Fix some tasks
-tasks {
-    distZip { dependsOn("shadowJar") }
-    distTar { dependsOn("shadowJar") }
-    startScripts { dependsOn("shadowJar") }
-    startShadowScripts { dependsOn("jar") }
-}
+kotlin.jvmToolchain(21)

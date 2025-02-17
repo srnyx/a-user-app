@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
 
+import xyz.srnyx.lazylibrary.LazyEmoji
+
 
 @Command
 class ContactSupportCmd: ApplicationCommand() {
@@ -27,7 +29,7 @@ class ContactSupportCmd: ApplicationCommand() {
     companion object {
         fun getEmbed(): MessageEmbed = EmbedBuilder()
             .setColor(0xFF0000)
-            .setDescription(":wave: **Hey, looks like you're lost!**\nUnfortunately, my DMS / pinging me is not the way to get support\n\nInstead, look for official support channels (ticket/modmail system, community support, etc...) and ask there, thanks :heart:")
+            .setDescription(LazyEmoji.WAVE_CLEAR.toString() + " **Hey, looks like you're lost!**\nUnfortunately, my DMS / pinging me is not the way to get support\n\nInstead, look for official support channels (ticket/modmail system, community support, etc...) and ask there, thanks :heart:")
             .build()
     }
 }
