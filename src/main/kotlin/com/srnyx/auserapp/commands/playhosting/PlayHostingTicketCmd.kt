@@ -33,7 +33,7 @@ class PlayHostingTicketCmd: ApplicationCommand() {
     companion object {
         fun getEmbed(): MessageEmbed = EmbedBuilder()
             .setColor(0xFFAD1F)
-            .setTitle("<:playhosting_cloud:1345508978498469958> Play Hosting Tickets")
+            .setTitle("Play Hosting Tickets")
             .setDescription(":wave: **Hi there!** Looks like you may have opened a ticket for an invalid reason...\nYou should only open a ticket if there is a bug with Play Hosting or if something needs fixing on our end\n\n> **If you need help running your server, please use <#1332915646035660841> instead!**\n### ✅ Examples of valid ticket reasons\n- \"The panel is not loading for me\"\n- \"I created my server, but I can't access it\"\nThese are issues that we would need to investigate further to resolve\n### ❌ Examples of invalid ticket reasons\n- \"My server isn't starting due to incorrect Java version\"\n- \"How do I install Forge 1.19.2\"\n- \"My modpack isn't working\"\nThese belong in <#1332915646035660841>, where anyone can help you!\n")
             .setFooter("Play Hosting", "https://cdn.venox.network/r/profile_square_square.png")
             .build()

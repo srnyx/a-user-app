@@ -27,7 +27,7 @@ class PlayHostingSupportCmd: ApplicationCommand() {
     companion object {
         fun getEmbed(): MessageEmbed = EmbedBuilder()
             .setColor(0xFFAD1F)
-            .setTitle("<:playhosting_cloud:1345508978498469958> Play Hosting Support")
+            .setTitle("Play Hosting Support")
             .setDescription(":wave: **Hi there!** If you need support for Play Hosting, please ask in the [Play Hosting Discord server](https://discord.gg/playhosting)")
             .setFooter("Play Hosting", "https://cdn.venox.network/r/profile_square_square.png")
             .build()
