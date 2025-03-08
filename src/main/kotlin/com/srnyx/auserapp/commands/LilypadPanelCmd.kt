@@ -1,4 +1,4 @@
-package com.srnyx.auserapp.commands.lilypad
+package com.srnyx.auserapp.commands
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
@@ -18,8 +18,7 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder
 @Command
 class LilypadPanelCmd: ApplicationCommand() {
     @JDASlashCommand(
-        name = "lilypad",
-        subcommand = "panel",
+        name = "lilypadpanel",
         description = "Send a message asking for the user to send their Lilypad server game panel link")
     @TopLevelSlashCommandData(
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
