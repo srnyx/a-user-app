@@ -9,9 +9,8 @@ import io.github.freya022.botcommands.api.commands.application.slash.annotations
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.MessageEmbed
 import net.dv8tion.jda.api.interactions.IntegrationType
+import net.dv8tion.jda.api.interactions.Interaction
 import net.dv8tion.jda.api.interactions.InteractionContextType
-
-import xyz.srnyx.lazylibrary.LazyEmoji
 
 
 @Command
@@ -23,13 +22,14 @@ class ContactSupportCmd: ApplicationCommand() {
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
     fun contactSupport(event: GlobalSlashEvent) {
-        event.replyEmbeds(getEmbed()).queue()
+        event.replyEmbeds(getEmbed(event)).queue()
     }
 
     companion object {
-        fun getEmbed(): MessageEmbed = EmbedBuilder()
+        fun getEmbed(interaction: Interaction): MessageEmbed = EmbedBuilder()
             .setColor(0xFF0000)
-            .setDescription(LazyEmoji.WAVE_CLEAR.toString() + " **Hey, looks like you're lost!**\nUnfortunately, my DMS / pinging me is not the way to get support\n\nInstead, look for official support channels (ticket/modmail system, community support, etc...) and ask there, thanks :heart:")
+            .setDescription(":wave: **Hey, looks like you're lost!**\nUnfortunately, my DMS / pinging me is not the way to get support\n\nInstead, look for official support channels (ticket/modmail system, community support, etc...) and ask there, thanks :heart:")
+            .setFooter(interaction.user.name, interaction.user.effectiveAvatarUrl)
             .build()
     }
 }

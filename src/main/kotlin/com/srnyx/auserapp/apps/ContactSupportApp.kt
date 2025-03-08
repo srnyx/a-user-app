@@ -18,6 +18,6 @@ class ContactSupportApp: ApplicationCommand() {
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
     fun contactSupport(event: GlobalMessageEvent) {
-        event.replyEmbeds(ContactSupportCmd.getEmbed()).queue()
+        event.replyEmbeds(ContactSupportCmd.getEmbed(event)).queue()
     }
 }
