@@ -1,6 +1,6 @@
 package com.srnyx.auserapp.apps
 
-import com.srnyx.auserapp.commands.LilypadPanelCmd
+import com.srnyx.auserapp.commands.playhosting.PlayHostingSupportCmd
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
@@ -12,12 +12,12 @@ import net.dv8tion.jda.api.interactions.InteractionContextType
 
 
 @Command
-class LilypadPanelApp: ApplicationCommand() {
+class PlayHostingSupportApp: ApplicationCommand() {
     @JDAMessageCommand(
-        name = "Lilypad Panel",
+        name = "Play Hosting Support",
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
-    fun lilypadPanel(event: GlobalMessageEvent) {
-        event.replyEmbeds(LilypadPanelCmd.getEmbed()).queue()
+    fun lilypadPlayHostingApp(event: GlobalMessageEvent) {
+        event.replyEmbeds(PlayHostingSupportCmd.getEmbed()).queue()
     }
 }
