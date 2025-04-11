@@ -1,4 +1,4 @@
-package com.srnyx.auserapp.commands.playhosting
+package com.srnyx.auserapp.commands
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
@@ -13,12 +13,11 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder
 
 
 @Command
-class PlayHostingSupportCmd: ApplicationCommand() {
+class PlayHostingCmd: ApplicationCommand() {
     @JDASlashCommand(
         name = "playhosting",
-        subcommand = "support",
         description = "Send a message telling the user to ask for help in the Play Hosting server")
-    fun playHostingSupport(event: GlobalSlashEvent, @SlashOption(description = "The user to tell about the Play Hosting server") user: User?) {
+    fun playHosting(event: GlobalSlashEvent, @SlashOption(description = "The user to tell about the Play Hosting server") user: User?) {
         val builder = MessageCreateBuilder()
         user?.let { builder.setContent(it.asMention) }
         event.reply(builder.setEmbeds(getEmbed()).build()).queue()
