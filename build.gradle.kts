@@ -1,5 +1,3 @@
-import xyz.srnyx.gradlegalaxy.enums.Repository
-import xyz.srnyx.gradlegalaxy.enums.repository
 import xyz.srnyx.gradlegalaxy.utility.setupLazyLibrary
 
 
@@ -7,20 +5,16 @@ plugins {
     application
     kotlin("jvm")
     id("xyz.srnyx.gradle-galaxy") version "1.3.3"
-    id("com.gradleup.shadow") version "8.3.6"
-    id("dev.reformator.stacktracedecoroutinator") version "2.4.5"
+    id("com.gradleup.shadow") version "8.3.8"
+    id("dev.reformator.stacktracedecoroutinator") version "2.5.4"
 }
 
-setupLazyLibrary("e7af7ab598", "5.3.1", "com.srnyx", "1.0.0", "A simple Discord user app")
+setupLazyLibrary("976f3062f3", "5.6.1", "com.srnyx", "1.0.0", "A simple Discord user app")
 
-repository(Repository.MAVEN_CENTRAL, Repository.JITPACK)
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("io.github.freya022", "BotCommands", "3.0.0-alpha.24")
-    implementation("org.spongepowered", "configurate-yaml", "4.1.2")
-    implementation("org.postgresql", "postgresql", "42.7.5")
-    implementation("com.zaxxer", "HikariCP", "6.2.1")
-    implementation("ch.qos.logback", "logback-classic", "1.5.16")
+    implementation("io.github.freya022", "BotCommands", "3.0.0-beta.2")
+    implementation("org.flywaydb", "flyway-database-postgresql", "11.10.3")
 }
 
 kotlin.jvmToolchain(21)
