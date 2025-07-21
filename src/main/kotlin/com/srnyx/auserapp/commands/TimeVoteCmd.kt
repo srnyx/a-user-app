@@ -14,7 +14,7 @@ import xyz.srnyx.lazylibrary.LazyEmoji
 
 
 @Command
-class TimeVoteCmd : ApplicationCommand() {
+class TimeVoteCmd: ApplicationCommand() {
     companion object {
         private const val LETTERS = "abcdefghijklmnopqrstuvwxyz"
     }

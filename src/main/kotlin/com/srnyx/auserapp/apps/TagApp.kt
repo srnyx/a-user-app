@@ -3,6 +3,8 @@ package com.srnyx.auserapp.apps
 import com.srnyx.auserapp.commands.tag.ContactSupportCmd
 import com.srnyx.auserapp.commands.tag.PlayHostingCmd
 
+import dev.freya02.jda.emojis.unicode.Emojis
+
 import dev.minn.jda.ktx.messages.into
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
@@ -12,7 +14,6 @@ import io.github.freya022.botcommands.api.commands.application.context.message.G
 import io.github.freya022.botcommands.api.components.SelectMenus
 import io.github.freya022.botcommands.api.components.data.InteractionConstraints
 
-import net.dv8tion.jda.api.entities.emoji.Emoji
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
 import net.dv8tion.jda.api.interactions.components.selections.SelectOption
@@ -34,22 +35,22 @@ class TagApp(private val menus: SelectMenus): ApplicationCommand() {
             constraints(InteractionConstraints.ofUsers(event.user))
             options += listOf(
                 SelectOption.of("No Hello", "hello")
-                    .withEmoji(Emoji.fromUnicode("👋"))
+                    .withEmoji(Emojis.WAVE)
                     .withDescription("nohello.net"),
                 SelectOption.of("Contact Support", "support")
-                    .withEmoji(Emoji.fromUnicode("🆘"))
+                    .withEmoji(Emojis.SOS)
                     .withDescription("Tel the user to use the proper means to get support"),
                 SelectOption.of("Don't Ask to Ask", "ask")
-                    .withEmoji(Emoji.fromUnicode("❔"))
+                    .withEmoji(Emojis.GREY_QUESTION)
                     .withDescription("dontasktoask.com"),
                 SelectOption.of("Google It", "google")
-                    .withEmoji(Emoji.fromUnicode("🔍"))
+                    .withEmoji(Emojis.MAG)
                     .withDescription("google.com"),
                 SelectOption.of("How to Ask for Help", "howtoask")
-                    .withEmoji(Emoji.fromUnicode("❓"))
+                    .withEmoji(Emojis.QUESTION)
                     .withDescription("How to ask for help in a proper way"),
                 SelectOption.of("Play Hosting Support", "playhosting")
-                    .withEmoji(Emoji.fromUnicode("☁️"))
+                    .withEmoji(Emojis.CLOUD)
                     .withDescription("Tell the user to ask for help in Play Hosting"))
 
             bindTo { selectEvent ->
