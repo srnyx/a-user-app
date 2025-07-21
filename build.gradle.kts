@@ -1,3 +1,4 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import xyz.srnyx.gradlegalaxy.utility.setupLazyLibrary
 
 
@@ -18,3 +19,6 @@ dependencies {
 }
 
 kotlin.jvmToolchain(21)
+
+// Fix Java's service loading, which Flyway uses
+tasks.withType<ShadowJar> { mergeServiceFiles() }

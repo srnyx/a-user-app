@@ -12,7 +12,6 @@ import org.flywaydb.core.Flyway
 @BService
 class DatabaseSource(config: Config): HikariSourceSupplier {
     override val source = HikariDataSource(HikariConfig().apply { jdbcUrl = config.database })
-
     init {
         Flyway.configure()
             .dataSource(source)
