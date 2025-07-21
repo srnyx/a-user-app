@@ -1,0 +1,106 @@
+package com.srnyx.auserapp.apps
+
+import io.github.freya022.botcommands.api.commands.annotations.Command
+import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
+import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
+import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
+
+import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.entities.Message
+import net.dv8tion.jda.api.interactions.IntegrationType
+import net.dv8tion.jda.api.interactions.InteractionHook
+
+import xyz.srnyx.lazylibrary.LazyEmoji
+import xyz.srnyx.lazylibrary.utility.LazyUtilities
+
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.URL
+import java.net.URLConnection
+import java.util.stream.Collectors
+
+
+@Command
+class PasteApp: ApplicationCommand() {
+    companion object {
+        const val PASTE_URL: String = "paste.venox.network"
+    }
+
+    @JDAMessageCommand(
+        name = "Upload paste",
+        contexts = [net.dv8tion.jda.api.interactions.InteractionContextType.GUILD, net.dv8tion.jda.api.interactions.InteractionContextType.PRIVATE_CHANNEL, net.dv8tion.jda.api.interactions.InteractionContextType.BOT_DM],
+        integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
+    fun pasteContext(event: GlobalMessageEvent) {
+        if (!LazyUtilities.userHasChannelPermission(event, Permission.MESSAGE_SEND)) {
+            event.reply(LazyEmoji.NO.toString() + " You do not have permission to use this command in this channel!").setEphemeral(true).queue()
+            return
+        }
+        val message = event.target
+
+        // Get the message's text (attachment/message content) and extension
+        var text: String = message.contentRaw
+        var extension = ""
+        val attachments: List<Message.Attachment> = message.attachments
+        if (attachments.isNotEmpty()) {
+            val attachment = attachments[0]
+            if (!attachment.isImage && !attachment.isVideo) try {
+                text = readStream(attachment.proxy.download().get())
+                extension = "." + attachment.fileName.substring(attachment.fileName.lastIndexOf('.') + 1)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        // No text to upload
+        if (text.trim().isBlank()) {
+            event.reply(LazyEmoji.NO.toString() + " No text to upload!").setEphemeral(true).queue()
+            return
+        }
+
+        // Establish connection
+        val connection: URLConnection
+        try {
+            connection = URL("https://${PASTE_URL}/documents").openConnection()
+        } catch (e: IOException) {
+            event.reply(LazyEmoji.NO.toString() + " Failed to upload paste!").setEphemeral(true).queue()
+            e.printStackTrace()
+            return
+        }
+        connection.setRequestProperty("authority", PASTE_URL)
+        connection.setRequestProperty("accept", "application/json, text/javascript, /; q=0.01")
+        connection.setRequestProperty("x-requested-with", "XMLHttpRequest")
+        connection.setRequestProperty("user-agent", event.user.asTag + " via Cobalt")
+        connection.setRequestProperty("content-type", "application/json; charset=UTF-8")
+        connection.doOutput = true
+
+        // Write to connection
+        try {
+            connection.getOutputStream().use { stream ->
+                stream.write(text.toByteArray())
+                stream.flush()
+            }
+        } catch (e: Exception) {
+            event.reply(LazyEmoji.NO.toString() + " Failed to upload paste").setEphemeral(true).queue()
+            e.printStackTrace()
+            return
+        }
+
+        // Reply with paste link
+        try {
+            event.deferReply(true)
+                .flatMap{ obj: InteractionHook -> obj.deleteOriginal() }
+                .queue()
+            val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
+            message.reply(LazyEmoji.YES.toString() + " https://" + PASTE_URL + "/" + id + extension).mentionRepliedUser(false).queue()
+        } catch (e: IOException) {
+            event.reply(LazyEmoji.NO.toString() + " Failed to upload paste").setEphemeral(true).queue()
+            e.printStackTrace()
+        }
+    }
+
+    private fun readStream(stream: InputStream): String {
+        return BufferedReader(InputStreamReader(stream)).lines().collect(Collectors.joining("\n"))
+    }
+}

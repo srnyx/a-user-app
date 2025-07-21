@@ -10,7 +10,7 @@ import kotlin.io.path.Path
 import kotlin.system.exitProcess
 
 
-data class Config(val token: String, val owner: Long) {
+data class Config(val token: String, val database: String, val owner: Long) {
     companion object {
         @get:BService
         val instance: Config by lazy {
@@ -25,7 +25,7 @@ data class Config(val token: String, val owner: Long) {
             }
 
             // Return config
-            return@lazy Config(token, node.node("owner").long)
+            return@lazy Config(token, node.node("database").string.toString(), node.node("owner").long)
         }
     }
 }

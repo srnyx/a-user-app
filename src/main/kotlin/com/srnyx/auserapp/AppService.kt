@@ -16,14 +16,13 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag
  * Service to start JDA at the appropriate time
  */
 @BService
-class App(private val config: Config) : JDAService() {
+class AppService(private val config: Config) : JDAService() {
     override val intents: Set<GatewayIntent> = setOf(GatewayIntent.MESSAGE_CONTENT)
     override val cacheFlags: Set<CacheFlag> = enumSetOf()
 
     override fun createJDA(event: BReadyEvent, eventManager: IEventManager) {
         light(
             token = config.token,
-            activity = Activity.customStatus("srnyx.com"),
-        )
+            activity = Activity.customStatus("srnyx.com"))
     }
 }

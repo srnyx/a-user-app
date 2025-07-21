@@ -1,4 +1,4 @@
-package com.srnyx.auserapp.commands;
+package com.srnyx.auserapp.commands.tag
 
 import io.github.freya022.botcommands.api.commands.annotations.Command;
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
@@ -16,7 +16,8 @@ import net.dv8tion.jda.api.interactions.InteractionContextType
 @Command
 class ContactSupportCmd: ApplicationCommand() {
     @JDASlashCommand(
-        name = "contactsupport",
+        name = "tag",
+        subcommand = "contactsupport",
         description = "Send a message telling the user to use the proper means to get support")
     @TopLevelSlashCommandData(
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],

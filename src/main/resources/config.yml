@@ -1,5 +1,9 @@
 # Token to run the app with
 token: "PUT_BOT_TOKEN_HERE"
 
+# Database to use for BotCommands dependency (THIS IS NOT FOR THE BOTS DATA)
+# Supports: MariaDB, SQLite, PostgreSQL, H2
+database: "PUT_CONNECTION_STRING_HERE"
+
 # Owner ID of the app
 owner: 242385234992037888 # srnyx

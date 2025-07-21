@@ -1,0 +1,25 @@
+{
+    "general_error_message": "<:vnwarning:1096159841120165908> An uncaught exception occurred and has been reported to the bot developers, please try again later!",
+
+    "user.perm.error.message": "<:vnno:1095912334792331326> You are not allowed to do this!",
+    "bot.perm.error.message": "<:vnno:1095912334792331326> I am missing these permissions: {permissions}",
+    "owner.only.error.message": "<:vnno:1095912334792331326> Only the bot owner can use this!",
+
+    "application_commands_not_available": "<:vnno:1095912334792331326> Application commands are not available yet, please try again later!",
+    "command.not.found.message": "<:vnno:1095912334792331326> Unknown command, maybe you meant: {suggestions}",
+
+    "resolver.channel.not_found.message": "<:vnno:1095912334792331326> The target channel does not exist anymore!",
+    "resolver.channel.missing_access.message": "<:vnno:1095912334792331326> The bot cannot access {channel_mention}!",
+    "resolver.user.not_found.message": "<:vnno:1095912334792331326> The target user does not exist anymore!",
+
+    "closed.dm.error.message": "<:vnno:1095912334792331326> Unable to send you a DM, please open your DMs from this server!",
+
+    "slash.command.unresolvable.option.message": "<:vnno:1095912334792331326> The option `{optionName}` could not be resolved!",
+
+    "nsfw.only.error.message": "<:vnno:1095912334792331326> This command can only be used in NSFW channels!",
+
+    "component.not.allowed.error.message": "<:vnno:1095912334792331326> You are not allowed to use this!",
+    "component.expired.error.message": "<:vnno:1095912334792331326> This component is not usable anymore!",
+
+    "modal.expired.error.message": "<:vnno:1095912334792331326> This modal is no longer available!"
+}

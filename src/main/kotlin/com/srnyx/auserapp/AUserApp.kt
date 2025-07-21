@@ -23,6 +23,7 @@ object AUserApp {
                 addPredefinedOwners(Config.instance.owner)
                 addSearchPath("com.srnyx.auserapp")
                 applicationCommands { fileCache(Path("var/tmp/BotCommands")) }
+                components { enable = true }
                 textCommands { enable = false }
             }
         } catch (e: Exception) {
