@@ -7,9 +7,8 @@ import io.github.freya022.botcommands.api.commands.application.context.message.G
 
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Message
-import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel
 import net.dv8tion.jda.api.interactions.IntegrationType
-import net.dv8tion.jda.api.interactions.InteractionHook
+import net.dv8tion.jda.api.interactions.components.buttons.Button
 
 import xyz.srnyx.lazylibrary.LazyEmoji
 import xyz.srnyx.lazylibrary.utility.LazyUtilities
@@ -43,15 +42,22 @@ class PasteApp: ApplicationCommand() {
         // Get the message's text (attachment/message content) and extension
         val message = event.target
         var text: String = message.contentRaw
+        var name = "**text**"
         var extension = ""
         val attachments: List<Message.Attachment> = message.attachments
         if (attachments.isNotEmpty()) {
             val attachment = attachments[0]
-            if (!attachment.isImage && !attachment.isVideo) try {
-                text = readStream(attachment.proxy.download().get())
-                extension = "." + attachment.fileName.substring(attachment.fileName.lastIndexOf('.') + 1)
-            } catch (e: Exception) {
-                e.printStackTrace()
+            if (!attachment.isImage && !attachment.isVideo) {
+                try {
+                    text = readStream(attachment.proxy.download().get())
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    event.reply(LazyEmoji.NO.toString() + " Failed to read attachment!").setEphemeral(true).queue()
+                    return
+                }
+                val fileName: String = attachment.fileName
+                name = "file **${fileName}**"
+                extension = "." + fileName.substring(fileName.lastIndexOf('.') + 1)
             }
         }
 
@@ -84,24 +90,20 @@ class PasteApp: ApplicationCommand() {
                 stream.flush()
             }
         } catch (e: Exception) {
-            event.reply(LazyEmoji.NO.toString() + " Failed to upload paste").setEphemeral(true).queue()
+            event.reply(LazyEmoji.NO.toString() + " Failed to upload paste!").setEphemeral(true).queue()
             e.printStackTrace()
             return
         }
 
         // Reply with paste link
         try {
-            event.deferReply(true)
-                .flatMap{ obj: InteractionHook -> obj.deleteOriginal() }
-                .queue()
             val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
-            event.jda.getChannelById(MessageChannel::class.java, event.channelId!!)
-                ?.sendMessage(LazyEmoji.YES.toString() + " https://" + PASTE_URL + "/" + id + extension)
-                ?.setMessageReference(message)
-                ?.mentionRepliedUser(false)
-                ?.queue()
+            event.reply(LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to https://" + PASTE_URL + "/" + id + extension)
+                .setActionRow(Button.link(message.jumpUrl, "Go to source message"))
+                .setAllowedMentions(LazyUtilities.NO_MENTIONS)
+                .queue()
         } catch (e: IOException) {
-            event.reply(LazyEmoji.NO.toString() + " Failed to upload paste").setEphemeral(true).queue()
+            event.reply(LazyEmoji.NO.toString() + " Failed to upload paste!").setEphemeral(true).queue()
             e.printStackTrace()
         }
     }
