@@ -37,9 +37,9 @@ class PasteApp: ApplicationCommand() {
             event.reply(LazyEmoji.NO.toString() + " You do not have permission to use this command in this channel!").setEphemeral(true).queue()
             return
         }
-        val message = event.target
 
         // Get the message's text (attachment/message content) and extension
+        val message = event.target
         var text: String = message.contentRaw
         var extension = ""
         val attachments: List<Message.Attachment> = message.attachments
@@ -93,7 +93,7 @@ class PasteApp: ApplicationCommand() {
                 .flatMap{ obj: InteractionHook -> obj.deleteOriginal() }
                 .queue()
             val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
-            message.reply(LazyEmoji.YES.toString() + " https://" + PASTE_URL + "/" + id + extension).mentionRepliedUser(false).queue()
+            event.target.reply(LazyEmoji.YES.toString() + " https://" + PASTE_URL + "/" + id + extension).mentionRepliedUser(false).queue()
         } catch (e: IOException) {
             event.reply(LazyEmoji.NO.toString() + " Failed to upload paste").setEphemeral(true).queue()
             e.printStackTrace()
