@@ -7,6 +7,7 @@ import io.github.freya022.botcommands.api.commands.application.context.message.G
 
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.entities.Message
+import net.dv8tion.jda.api.entities.channel.middleman.MessageChannel
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionHook
 
@@ -17,7 +18,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
-import java.net.URL
+import java.net.URI
 import java.net.URLConnection
 import java.util.stream.Collectors
 
@@ -33,6 +34,7 @@ class PasteApp: ApplicationCommand() {
         contexts = [net.dv8tion.jda.api.interactions.InteractionContextType.GUILD, net.dv8tion.jda.api.interactions.InteractionContextType.PRIVATE_CHANNEL, net.dv8tion.jda.api.interactions.InteractionContextType.BOT_DM],
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
     fun pasteContext(event: GlobalMessageEvent) {
+        if (event.channelId == null) return
         if (!LazyUtilities.userHasChannelPermission(event, Permission.MESSAGE_SEND)) {
             event.reply(LazyEmoji.NO.toString() + " You do not have permission to use this command in this channel!").setEphemeral(true).queue()
             return
@@ -62,7 +64,7 @@ class PasteApp: ApplicationCommand() {
         // Establish connection
         val connection: URLConnection
         try {
-            connection = URL("https://${PASTE_URL}/documents").openConnection()
+            connection = URI.create("https://${PASTE_URL}/documents").toURL().openConnection()
         } catch (e: IOException) {
             event.reply(LazyEmoji.NO.toString() + " Failed to upload paste!").setEphemeral(true).queue()
             e.printStackTrace()
@@ -93,7 +95,11 @@ class PasteApp: ApplicationCommand() {
                 .flatMap{ obj: InteractionHook -> obj.deleteOriginal() }
                 .queue()
             val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
-            event.target.reply(LazyEmoji.YES.toString() + " https://" + PASTE_URL + "/" + id + extension).mentionRepliedUser(false).queue()
+            event.jda.getChannelById(MessageChannel::class.java, event.channelId!!)
+                ?.sendMessage(LazyEmoji.YES.toString() + " https://" + PASTE_URL + "/" + id + extension)
+                ?.setMessageReference(message)
+                ?.mentionRepliedUser(false)
+                ?.queue()
         } catch (e: IOException) {
             event.reply(LazyEmoji.NO.toString() + " Failed to upload paste").setEphemeral(true).queue()
             e.printStackTrace()
