@@ -1,0 +1,31 @@
+{
+    "uncaught_exception": "<:vnwarning:1096159841120165908> An uncaught exception occurred and has been reported to the bot developers, please try again later!",
+
+    "missing.permissions.user": "<:vnno:1095912334792331326> You're not allowed to do this!",
+    "missing.permissions.bot": "<:vnno:1095912334792331326> I am missing these permissions: {permissions}",
+    "owner_only": "<:vnno:1095912334792331326> Only the bot owner can use this!",
+
+    "ratelimited.user": "<:vnclock:1298363518118006845> You will be able to use this {timestamp}",
+    "ratelimited.channel": "<:vnclock:1298363518118006845> You will be able to use this in this channel {timestamp}",
+    "ratelimited.guild": "<:vnclock:1298363518118006845> You will be able to use this in this guild {timestamp}",
+
+    "commands.application.not_available": "<:vnno:1095912334792331326> Application commands are not available yet, please try again later!",
+    "commands.text.not_found": "<:vnno:1095912334792331326> Unknown command, maybe you meant: {suggestions}",
+
+    "resolver.channel.not_found": "<:vnno:1095912334792331326> The target channel does not exist anymore!",
+    "resolver.channel.missing_access": "<:vnno:1095912334792331326> The bot cannot access {channel_mention}!",
+    "resolver.user.not_found": "<:vnno:1095912334792331326> The target user does not exist anymore!",
+
+    "closed.dm.error.message": "<:vnno:1095912334792331326> Unable to send you a DM, please open your DMs from this server!",
+
+    "commands.slash.option.unresolvable": "<:vnno:1095912334792331326> The option `{optionName}` could not be resolved!",
+
+    "direct_messages.closed": "<:vnno:1095912334792331326> Unable to send you a DM, please open your DMs from this server",
+
+    "nsfw_only": "<:vnno:1095912334792331326> This command can only be used in NSFW channels!",
+
+    "components.not_allowed": "<:vnno:1095912334792331326> You're not allowed to use this!",
+    "components.expired": "<:vnno:1095912334792331326> This component is not usable anymore!",
+
+    "modals.expired": "<:vnno:1095912334792331326> This modal is no longer available!"
+}
