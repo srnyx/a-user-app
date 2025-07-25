@@ -12,6 +12,7 @@ plugins {
 
 setupLazyLibrary("976f3062f3", "5.6.1", "com.srnyx", "1.0.0", "A simple Discord user app")
     .exclude("io.github.freya022", "BotCommands")
+    .exclude("net.dv8tion", "JDA")
 
 dependencies {
     implementation(kotlin("stdlib"))
