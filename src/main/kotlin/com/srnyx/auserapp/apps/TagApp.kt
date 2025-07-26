@@ -49,6 +49,9 @@ class TagApp(private val menus: SelectMenus): ApplicationCommand() {
                 SelectOption.of("How to Ask for Help", "howtoask")
                     .withEmoji(Emojis.QUESTION)
                     .withDescription("How to ask for help in a proper way"),
+                SelectOption.of("Try It and See", "tryitandsee")
+                    .withEmoji(Emojis.EYES)
+                    .withDescription("tryitands.ee"),
                 SelectOption.of("Play Hosting Support", "playhosting")
                     .withEmoji(Emojis.CLOUD)
                     .withDescription("Tell the user to ask for help in Play Hosting"))
@@ -62,6 +65,7 @@ class TagApp(private val menus: SelectMenus): ApplicationCommand() {
                     "ask" -> hook.editOriginal("https://dontasktoask.com")
                     "google" -> hook.editOriginal("https://google.com/search?q=" + URLEncoder.encode(event.target.contentDisplay, "UTF-8"))
                     "howtoask" -> hook.editOriginal(":wave: **Hi!** Please take a quick moment to read this guide:\nhttps://blog.jonathanchun.com/2025/02/17/the-art-of-asking-for-help")
+                    "tryitandsee" -> hook.editOriginal("https://tryitands.ee")
                     "playhosting" -> hook.editOriginalEmbeds(PlayHostingCmd.getEmbed())
                     else -> hook.editOriginal(LazyEmoji.NO.toString() + " Unknown tag selected: `" + selection + "`!")
                 }.setComponents().queue()
