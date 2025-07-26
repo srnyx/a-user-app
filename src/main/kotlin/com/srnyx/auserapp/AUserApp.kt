@@ -6,6 +6,11 @@ import io.github.freya022.botcommands.api.core.BotCommands
 
 import io.github.oshai.kotlinlogging.KotlinLogging
 
+import okhttp3.OkHttpClient
+
+import java.util.logging.Level
+import java.util.logging.Logger
+
 import kotlin.io.path.Path
 import kotlin.io.path.absolutePathString
 import kotlin.system.exitProcess
@@ -16,6 +21,8 @@ val LOGGER by lazy { KotlinLogging.logger {} }
 object AUserApp {
     @JvmStatic
     fun main(args: Array<out String>) {
+        Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
+
         try {
             System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, Path("logback.xml").absolutePathString())
 
