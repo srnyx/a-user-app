@@ -29,7 +29,7 @@ class ContactSupportCmd: ApplicationCommand() {
     companion object {
         fun getEmbed(interaction: Interaction): MessageEmbed = EmbedBuilder()
             .setColor(0xFF0000)
-            .setDescription(":wave: **Hey, looks like you're lost!**\nUnfortunately, my DMS / pinging me is not the way to get support\n\nInstead, look for official support channels (ticket/modmail system, community support, etc...) and ask there, thanks :heart:")
+            .setDescription(":wave: **Hey, looks like you're lost!**\nUnfortunately, my DMs / pinging me is not the way to get support\n\nInstead, look for official support channels (ticket/modmail system, community support, etc...) and ask there, thanks :heart:")
             .setFooter(interaction.user.name, interaction.user.effectiveAvatarUrl)
             .build()
     }

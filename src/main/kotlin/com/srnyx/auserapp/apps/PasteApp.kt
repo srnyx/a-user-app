@@ -98,8 +98,11 @@ class PasteApp: ApplicationCommand() {
         // Reply with paste link
         try {
             val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
-            event.reply(LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to https://" + PASTE_URL + "/" + id + extension)
-                .setActionRow(Button.link(message.jumpUrl, "Go to source message"))
+            val url = "https://$PASTE_URL/$id$extension"
+            event.reply(LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to " + url)
+                .setActionRow(
+                    Button.link(url, "Open paste"),
+                    Button.link(message.jumpUrl, "Go to source message"))
                 .setAllowedMentions(LazyUtilities.NO_MENTIONS)
                 .queue()
         } catch (e: IOException) {
