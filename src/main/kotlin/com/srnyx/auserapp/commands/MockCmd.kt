@@ -10,7 +10,7 @@ import io.github.freya022.botcommands.api.commands.application.slash.annotations
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
 
-import xyz.srnyx.lazylibrary.utility.LazyUtilities
+import xyz.srnyx.javautilities.MiscUtility
 
 
 @Command
@@ -28,7 +28,7 @@ class MockCmd: ApplicationCommand() {
 
     companion object {
         fun mockify(text: String): String = text
-            .map { c -> if (LazyUtilities.RANDOM.nextBoolean()) c.uppercaseChar() else c.lowercaseChar() }
+            .map { c -> if (MiscUtility.RANDOM.nextBoolean()) c.uppercaseChar() else c.lowercaseChar() }
             .joinToString("")
     }
 }
