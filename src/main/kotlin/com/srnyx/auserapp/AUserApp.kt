@@ -1,52 +1,26 @@
 package com.srnyx.auserapp
 
-import ch.qos.logback.classic.ClassicConstants
-
-import io.github.freya022.botcommands.api.core.BotCommands
-
-import io.github.oshai.kotlinlogging.KotlinLogging
+import net.dv8tion.jda.api.entities.Activity
+import net.dv8tion.jda.api.requests.GatewayIntent
+import net.dv8tion.jda.api.utils.cache.CacheFlag
 
 import okhttp3.OkHttpClient
+
+import xyz.srnyx.lazylibrary.LazyLibrary
 
 import java.util.logging.Level
 import java.util.logging.Logger
 
-import kotlin.io.path.Path
-import kotlin.io.path.absolutePathString
-import kotlin.system.exitProcess
-
-
-val LOGGER by lazy { KotlinLogging.logger {} }
 
 object AUserApp {
     @JvmStatic
     fun main(args: Array<out String>) {
         Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
 
-        try {
-            System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, Path("logback.xml").absolutePathString())
-
-            BotCommands.create {
-                addPredefinedOwners(Config.instance.owner)
-                addSearchPath("com.srnyx.auserapp")
-                applicationCommands { fileCache(Path("var/tmp/BotCommands")) }
-                components { enable = true }
-                textCommands { enable = false }
-            }
-        } catch (e: Exception) {
-            LOGGER.error(e) { "Unable to start the bot" }
-            exitProcess(1)
-        }
-
-        LOGGER.info { "A User App has finished starting!" }
-
-        // Stop app if "stop" is entered
-        while (true) {
-            val input = readlnOrNull() ?: continue
-            if (input == "stop") {
-                LOGGER.info { "Stopping the bot..." }
-                exitProcess(0)
-            }
-        }
+        LazyLibrary.INSTANCE
+            .gatewayIntents(GatewayIntent.MESSAGE_CONTENT)
+            .jdaBuilder { builder -> builder.disableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE, CacheFlag.EMOJI, CacheFlag.STICKER, CacheFlag.CLIENT_STATUS, CacheFlag.ONLINE_STATUS, CacheFlag.SCHEDULED_EVENTS) }
+            .activities(Activity.watching("srnyx.com"))
+            .startBot(this.javaClass)
     }
 }

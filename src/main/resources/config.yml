@@ -5,5 +5,7 @@ token: "PUT_BOT_TOKEN_HERE"
 # Supports: MariaDB, SQLite, PostgreSQL, H2
 database: "PUT_CONNECTION_STRING_HERE"
 
-# Owner ID of the app
-owner: 242385234992037888 # srnyx
+# Owner IDs of the app
+owners:
+  primary: 242385234992037888 # srnyx
+  other: []
