@@ -3,9 +3,9 @@ package com.srnyx.auserapp.apps
 import com.srnyx.auserapp.commands.tag.ContactSupportCmd
 import com.srnyx.auserapp.commands.tag.PlayHostingCmd
 
-import dev.freya02.jda.emojis.unicode.Emojis
+import dev.freya02.botcommands.jda.ktx.components.into
 
-import dev.minn.jda.ktx.messages.into
+import dev.freya02.jda.emojis.unicode.Emojis
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
@@ -13,10 +13,10 @@ import io.github.freya022.botcommands.api.commands.application.context.annotatio
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 import io.github.freya022.botcommands.api.components.SelectMenus
 import io.github.freya022.botcommands.api.components.data.InteractionConstraints
+import net.dv8tion.jda.api.components.selections.SelectOption
 
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
-import net.dv8tion.jda.api.interactions.components.selections.SelectOption
 
 import xyz.srnyx.lazylibrary.LazyEmoji
 

@@ -1,14 +1,20 @@
 package com.srnyx.auserapp.apps
 
+import dev.freya02.botcommands.jda.ktx.components.ActionRow
+import dev.freya02.botcommands.jda.ktx.components.TextDisplay
+
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 
 import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.components.buttons.Button
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.interactions.IntegrationType
-import net.dv8tion.jda.api.interactions.components.buttons.Button
+import net.dv8tion.jda.api.interactions.InteractionContextType
+
+import okhttp3.OkHttpClient
 
 import xyz.srnyx.lazylibrary.LazyEmoji
 import xyz.srnyx.lazylibrary.utility.LazyUtilities
@@ -19,6 +25,8 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.URI
 import java.net.URLConnection
+import java.util.logging.Level
+import java.util.logging.Logger
 import java.util.stream.Collectors
 
 
@@ -28,9 +36,13 @@ class PasteApp: ApplicationCommand() {
         const val PASTE_URL: String = "paste.venox.network"
     }
 
+    init {
+        Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
+    }
+
     @JDAMessageCommand(
         name = "Upload paste",
-        contexts = [net.dv8tion.jda.api.interactions.InteractionContextType.GUILD, net.dv8tion.jda.api.interactions.InteractionContextType.PRIVATE_CHANNEL, net.dv8tion.jda.api.interactions.InteractionContextType.BOT_DM],
+        contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
     fun pasteContext(event: GlobalMessageEvent) {
         if (event.channelId == null) return
@@ -79,7 +91,7 @@ class PasteApp: ApplicationCommand() {
         connection.setRequestProperty("authority", PASTE_URL)
         connection.setRequestProperty("accept", "application/json, text/javascript, /; q=0.01")
         connection.setRequestProperty("x-requested-with", "XMLHttpRequest")
-        connection.setRequestProperty("user-agent", event.user.asTag + " via Cobalt")
+        connection.setRequestProperty("user-agent", event.user.asTag + " via A User App")
         connection.setRequestProperty("content-type", "application/json; charset=UTF-8")
         connection.doOutput = true
 
@@ -99,11 +111,14 @@ class PasteApp: ApplicationCommand() {
         try {
             val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
             val url = "https://$PASTE_URL/$id$extension"
-            event.reply(LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to " + url)
-                .setActionRow(
-                    Button.link(url, "Open paste"),
-                    Button.link(message.jumpUrl, "Go to source message"))
+            event.replyComponents(
+                TextDisplay { LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to " + url },
+                ActionRow {
+                    Button.link(url, "Open paste")
+                    Button.link(message.jumpUrl, "Go to source message")
+                })
                 .setAllowedMentions(LazyUtilities.NO_MENTIONS)
+                .useComponentsV2()
                 .queue()
         } catch (e: IOException) {
             event.reply(LazyEmoji.NO.toString() + " Failed to upload paste!").setEphemeral(true).queue()
