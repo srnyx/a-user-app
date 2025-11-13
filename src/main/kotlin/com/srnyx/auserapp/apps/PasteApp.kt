@@ -1,15 +1,14 @@
 package com.srnyx.auserapp.apps
 
-import dev.freya02.botcommands.jda.ktx.components.ActionRow
-import dev.freya02.botcommands.jda.ktx.components.TextDisplay
-
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 
 import net.dv8tion.jda.api.Permission
+import net.dv8tion.jda.api.components.actionrow.ActionRow
 import net.dv8tion.jda.api.components.buttons.Button
+import net.dv8tion.jda.api.components.textdisplay.TextDisplay
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
@@ -112,11 +111,10 @@ class PasteApp: ApplicationCommand() {
             val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
             val url = "https://$PASTE_URL/$id$extension"
             event.replyComponents(
-                TextDisplay { LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to " + url },
-                ActionRow {
-                    Button.link(url, "Open paste")
-                    Button.link(message.jumpUrl, "Go to source message")
-                })
+                TextDisplay.of(LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to " + url),
+                ActionRow.of(
+                    Button.link(url, "Open paste"),
+                    Button.link(message.jumpUrl, "Go to source message")))
                 .setAllowedMentions(LazyUtilities.NO_MENTIONS)
                 .useComponentsV2()
                 .queue()
