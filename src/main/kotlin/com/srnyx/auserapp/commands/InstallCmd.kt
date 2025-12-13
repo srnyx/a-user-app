@@ -27,6 +27,7 @@ class InstallCmd(private val buttons: Buttons): ApplicationCommand() {
         event.replyComponents(Section.of(
             buttons.link("https://discord.com/oauth2/authorize?client_id=1298765381296717845", "Install A User App"),
             TextDisplay.of(LazyEmoji.YES.toString() + " Click the button on the right to install **A User App**!")))
+            .useComponentsV2()
             .queue()
     }
 }
