@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel
 import net.dv8tion.jda.api.exceptions.ErrorHandler
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException
 import net.dv8tion.jda.api.interactions.IntegrationType
+import net.dv8tion.jda.api.interactions.InteractionContextType
 import net.dv8tion.jda.api.requests.ErrorResponse
 
 import xyz.srnyx.lazylibrary.LazyEmoji
@@ -27,7 +28,7 @@ class MockApp: ApplicationCommand() {
 
     @JDAMessageCommand(
         name = "Mock",
-        contexts = [net.dv8tion.jda.api.interactions.InteractionContextType.GUILD, net.dv8tion.jda.api.interactions.InteractionContextType.PRIVATE_CHANNEL, net.dv8tion.jda.api.interactions.InteractionContextType.BOT_DM],
+        contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
     fun mockApp(event: GlobalMessageEvent) {
         val content = event.target.contentRaw
@@ -49,7 +50,7 @@ class MockApp: ApplicationCommand() {
                 .mentionRepliedUser(false)
                 .setAllowedMentions(LazyUtilities.NO_MENTIONS)
                 .queue(null, IGNORE_AUTOMOD_MESSAGE_FILTER)
-        } catch (e: InsufficientPermissionException) {
+        } catch (_: InsufficientPermissionException) {
             event.reply(LazyEmoji.NO.toString() + " I don't have permission to send messages in <#" + event.channelId + ">!").queue();
         }
     }

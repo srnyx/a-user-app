@@ -13,8 +13,8 @@ import io.github.freya022.botcommands.api.commands.application.context.annotatio
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 import io.github.freya022.botcommands.api.components.SelectMenus
 import io.github.freya022.botcommands.api.components.data.InteractionConstraints
-import net.dv8tion.jda.api.components.selections.SelectOption
 
+import net.dv8tion.jda.api.components.selections.SelectOption
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
 

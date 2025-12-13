@@ -14,7 +14,7 @@ plugins {
 
 setupLazyLibrary(
     javaSetupConfig = JavaSetupConfig("com.srnyx", "1.0.0", "A simple Discord user app"),
-    jdaConfig = DependencyConfig("6.1.1"),
+    jdaConfig = DependencyConfig("6.1.3"),
     lazyLibraryConfig = DependencyConfig("botcommands-v3-SNAPSHOT"))
 
 dependencies {
