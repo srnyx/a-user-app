@@ -1,5 +1,7 @@
 package com.srnyx.auserapp.apps
 
+import dev.freya02.botcommands.jda.ktx.components.TextDisplay
+
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
@@ -7,12 +9,9 @@ import io.github.freya022.botcommands.api.commands.application.context.message.G
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.components.actionrow.ActionRow
 import net.dv8tion.jda.api.components.buttons.Button
-import net.dv8tion.jda.api.components.textdisplay.TextDisplay
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
-
-import okhttp3.OkHttpClient
 
 import xyz.srnyx.lazylibrary.LazyEmoji
 import xyz.srnyx.lazylibrary.utility.LazyUtilities
@@ -23,19 +22,16 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.URI
 import java.net.URLConnection
-import java.util.logging.Level
-import java.util.logging.Logger
 import java.util.stream.Collectors
+import java.util.zip.GZIPInputStream
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
 
 
 @Command
 class PasteApp {
     companion object {
         const val PASTE_URL: String = "paste.venox.network"
-    }
-
-    init {
-        Logger.getLogger(OkHttpClient::class.java.name).level = Level.FINE
     }
 
     @JDAMessageCommand(
@@ -58,16 +54,64 @@ class PasteApp {
         if (attachments.isNotEmpty()) {
             val attachment = attachments[0]
             if (!attachment.isImage && !attachment.isVideo) {
-                try {
-                    text = readStream(attachment.proxy.download().get())
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    event.reply(LazyEmoji.NO.toString() + " Failed to read attachment!").setEphemeral(true).queue()
-                    return
+                val inputStream: InputStream = attachment.proxy.download().get()
+                if (attachment.fileExtension != null) extension = "." + attachment.fileExtension?.lowercase()
+
+                if (extension == ".zip") {
+                    // Extract and read if .zip
+                    try {
+                        ZipInputStream(inputStream).use { zipStream ->
+                            // Get first entry
+                            val entry: ZipEntry? = zipStream.nextEntry
+                            if (entry == null) {
+                                event.reply(LazyEmoji.NO.toString() + " Archive is empty!").setEphemeral(true).queue()
+                                return
+                            }
+
+                            // Read extracted file
+                            text = readStream(zipStream)
+
+                            // Get name and extension of extracted file if possible
+                            val entryName = entry.name
+                            name = "extracted **$entryName**"
+                            if (entryName != null && entryName.contains('.')) {
+                                extension = "." + entryName.substringAfterLast('.').lowercase()
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        event.reply(LazyEmoji.NO.toString() + " Failed to extract `.zip` archive!").setEphemeral(true).queue()
+                        return
+                    }
+                } else if (extension == ".gz") {
+                    // Extract and read if .gz
+                    try {
+                        // Read extracted file
+                        text = GZIPInputStream(inputStream)
+                            .bufferedReader()
+                            .use { it.readText() }
+
+                        // Get name and extension of extracted file if possible
+                        val noGz = attachment.fileName.removeSuffix(".gz")
+                        name = "extracted **$noGz**"
+                        if (noGz.contains('.')) extension = "." + noGz.substringAfterLast('.').lowercase()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        event.reply(LazyEmoji.NO.toString() + " Failed to extract `.gz` archive!").setEphemeral(true).queue()
+                        return
+                    }
+                } else {
+                    // Read normal attachment
+                    try {
+                        text = readStream(inputStream)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        event.reply(LazyEmoji.NO.toString() + " Failed to read attachment!").setEphemeral(true).queue()
+                        return
+                    }
+                    name = "file **${attachment.fileName}**"
+                    if (attachment.fileExtension != null) extension = "." + attachment.fileExtension?.lowercase()
                 }
-                val fileName: String = attachment.fileName
-                name = "file **${fileName}**"
-                extension = "." + fileName.substring(fileName.lastIndexOf('.') + 1)
             }
         }
 
@@ -110,7 +154,7 @@ class PasteApp {
             val id: String = readStream(connection.getInputStream()).split("\"".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[3]
             val url = "https://$PASTE_URL/$id$extension"
             event.replyComponents(
-                TextDisplay.of(LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to " + url),
+                TextDisplay(LazyEmoji.YES.toString() + " Successfully uploaded " + message.author.asMention + "'s " + name + " to " + url),
                 ActionRow.of(
                     Button.link(url, "Open paste"),
                     Button.link(message.jumpUrl, "Go to source message")))
