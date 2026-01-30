@@ -1,7 +1,6 @@
 package com.srnyx.auserapp.commands.tag
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
-import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.slash.GlobalSlashEvent
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.JDASlashCommand
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.SlashOption
@@ -13,7 +12,7 @@ import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder
 
 
 @Command
-class PlayHostingCmd: ApplicationCommand() {
+class PlayHostingCmd {
     @JDASlashCommand(
         name = "tag",
         subcommand = "playhosting",

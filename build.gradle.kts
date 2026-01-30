@@ -6,7 +6,7 @@ import xyz.srnyx.gradlegalaxy.data.config.DependencyConfig
 
 plugins {
     application
-    kotlin("jvm") version "2.2.10"
+    kotlin("jvm") version "2.3.0"
     id("xyz.srnyx.gradle-galaxy") version "2.0.2"
     id("com.gradleup.shadow") version "8.3.9"
     id("dev.reformator.stacktracedecoroutinator") version "2.5.7"
@@ -14,8 +14,8 @@ plugins {
 
 setupLazyLibrary(
     javaSetupConfig = JavaSetupConfig("com.srnyx", "1.0.0", "A simple Discord user app"),
-    jdaConfig = DependencyConfig("6.1.3"),
-    lazyLibraryConfig = DependencyConfig("botcommands-v3-SNAPSHOT"))
+    jdaConfig = DependencyConfig("6.3.0"),
+    lazyLibraryConfig = DependencyConfig("fabec338ba"))
 
 dependencies {
     implementation(kotlin("stdlib"))

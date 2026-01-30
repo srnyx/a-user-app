@@ -1,7 +1,6 @@
 package com.srnyx.auserapp.commands.tag
 
 import io.github.freya022.botcommands.api.commands.annotations.Command;
-import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.slash.GlobalSlashEvent
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.JDASlashCommand;
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.TopLevelSlashCommandData;
@@ -14,7 +13,7 @@ import net.dv8tion.jda.api.interactions.InteractionContextType
 
 
 @Command
-class ContactSupportCmd: ApplicationCommand() {
+class ContactSupportCmd {
     @JDASlashCommand(
         name = "tag",
         subcommand = "contactsupport",

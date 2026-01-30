@@ -1,7 +1,6 @@
 package com.srnyx.auserapp.commands.tag
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
-import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.slash.GlobalSlashEvent
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.JDASlashCommand
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.SlashOption
@@ -10,7 +9,7 @@ import java.net.URLEncoder
 
 
 @Command
-class GoogleItCmd: ApplicationCommand() {
+class GoogleItCmd {
     @JDASlashCommand(
         name = "tag",
         subcommand = "googleit",

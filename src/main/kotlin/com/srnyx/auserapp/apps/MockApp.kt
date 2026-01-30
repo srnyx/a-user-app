@@ -3,7 +3,6 @@ package com.srnyx.auserapp.apps
 import com.srnyx.auserapp.commands.MockCmd
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
-import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 
@@ -19,7 +18,7 @@ import xyz.srnyx.lazylibrary.utility.LazyUtilities
 
 
 @Command
-class MockApp: ApplicationCommand() {
+class MockApp {
     companion object {
         val IGNORE_AUTOMOD_MESSAGE_FILTER: ErrorHandler = ErrorHandler().ignore(
             ErrorResponse.MESSAGE_BLOCKED_BY_AUTOMOD,

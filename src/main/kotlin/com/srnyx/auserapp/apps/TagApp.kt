@@ -8,7 +8,6 @@ import dev.freya02.botcommands.jda.ktx.components.into
 import dev.freya02.jda.emojis.unicode.Emojis
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
-import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 import io.github.freya022.botcommands.api.components.SelectMenus
@@ -24,7 +23,7 @@ import java.net.URLEncoder
 
 
 @Command
-class TagApp(private val menus: SelectMenus): ApplicationCommand() {
+class TagApp(private val menus: SelectMenus) {
     @JDAMessageCommand(
         name = "Tag menu",
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],

@@ -1,7 +1,6 @@
 package com.srnyx.auserapp.apps
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
-import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 
@@ -30,7 +29,7 @@ import java.util.stream.Collectors
 
 
 @Command
-class PasteApp: ApplicationCommand() {
+class PasteApp {
     companion object {
         const val PASTE_URL: String = "paste.venox.network"
     }

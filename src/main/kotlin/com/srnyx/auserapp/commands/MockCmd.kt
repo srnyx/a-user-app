@@ -1,7 +1,6 @@
 package com.srnyx.auserapp.commands
 
 import io.github.freya022.botcommands.api.commands.annotations.Command
-import io.github.freya022.botcommands.api.commands.application.ApplicationCommand
 import io.github.freya022.botcommands.api.commands.application.slash.GlobalSlashEvent
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.JDASlashCommand
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.SlashOption
@@ -14,7 +13,7 @@ import xyz.srnyx.javautilities.MiscUtility
 
 
 @Command
-class MockCmd: ApplicationCommand() {
+class MockCmd {
     @JDASlashCommand(
         name = "mock",
         description = "Convert normal text to mock text (randomly capitalize)")
