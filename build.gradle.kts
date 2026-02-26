@@ -14,8 +14,8 @@ plugins {
 
 setupLazyLibrary(
     javaSetupConfig = JavaSetupConfig("com.srnyx", "1.0.0", "A simple Discord user app"),
-    jdaConfig = DependencyConfig("6.3.0"),
-    lazyLibraryConfig = DependencyConfig("fabec338ba"))
+    jdaConfig = DependencyConfig("6.3.1"),
+    lazyLibraryConfig = DependencyConfig("e9c0b9cf38"))
 
 dependencies {
     implementation(kotlin("stdlib"))
