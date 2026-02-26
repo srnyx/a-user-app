@@ -22,10 +22,9 @@ class InstallCmd(private val buttons: Buttons) {
     @TopLevelSlashCommandData(
         contexts = [InteractionContextType.GUILD, InteractionContextType.PRIVATE_CHANNEL, InteractionContextType.BOT_DM],
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
-    fun embed(event: GlobalSlashEvent) {
+    fun install(event: GlobalSlashEvent) {
         event.replyComponents(
-            Section {
-                buttons.link("https://discord.com/oauth2/authorize?client_id=1298765381296717845", "Install A User App")
+            Section(buttons.link("https://discord.com/oauth2/authorize?client_id=1298765381296717845", "Install A User App")) {
                 text(LazyEmoji.YES.toString() + " Click the button on the right to install **A User App**!")
             })
             .useComponentsV2()
