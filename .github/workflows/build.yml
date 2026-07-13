@@ -16,5 +16,6 @@ jobs:
   build:
     uses: srnyx/tools/.github/workflows/build.yml@main
     with:
-      name: A User App
-      java: 21
+      java: 26
+      pterodactyl-server: "835583a7"
+    secrets: inherit

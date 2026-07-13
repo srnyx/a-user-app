@@ -1,19 +1,16 @@
 package com.srnyx.auserapp.apps
 
 import com.srnyx.auserapp.commands.MockCmd
-
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
-
 import net.dv8tion.jda.api.entities.channel.middleman.GuildMessageChannel
 import net.dv8tion.jda.api.exceptions.ErrorHandler
 import net.dv8tion.jda.api.exceptions.InsufficientPermissionException
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
 import net.dv8tion.jda.api.requests.ErrorResponse
-
-import xyz.srnyx.lazylibrary.LazyEmoji
+import xyz.srnyx.lazylibrary.emoji.LazyEmoji
 import xyz.srnyx.lazylibrary.utility.LazyUtilities
 
 

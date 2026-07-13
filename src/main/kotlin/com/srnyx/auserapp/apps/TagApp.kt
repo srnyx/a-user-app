@@ -2,22 +2,17 @@ package com.srnyx.auserapp.apps
 
 import com.srnyx.auserapp.commands.tag.ContactSupportCmd
 import com.srnyx.auserapp.commands.tag.PlayHostingCmd
-
 import dev.freya02.botcommands.jda.ktx.components.into
-
 import dev.freya02.jda.emojis.unicode.Emojis
-
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
 import io.github.freya022.botcommands.api.components.SelectMenus
 import io.github.freya022.botcommands.api.components.data.InteractionConstraints
-
 import net.dv8tion.jda.api.components.selections.SelectOption
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
-
-import xyz.srnyx.lazylibrary.LazyEmoji
+import xyz.srnyx.lazylibrary.emoji.LazyEmoji
 
 import java.net.URLEncoder
 

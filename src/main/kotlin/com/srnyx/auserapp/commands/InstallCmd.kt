@@ -1,17 +1,14 @@
 package com.srnyx.auserapp.commands
 
 import dev.freya02.botcommands.jda.ktx.components.Section
-
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.slash.GlobalSlashEvent
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.JDASlashCommand
 import io.github.freya022.botcommands.api.commands.application.slash.annotations.TopLevelSlashCommandData
 import io.github.freya022.botcommands.api.components.Buttons
-
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
-
-import xyz.srnyx.lazylibrary.LazyEmoji
+import xyz.srnyx.lazylibrary.emoji.LazyEmoji
 
 
 @Command

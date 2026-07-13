@@ -1,19 +1,16 @@
 package com.srnyx.auserapp.apps
 
 import dev.freya02.botcommands.jda.ktx.components.TextDisplay
-
 import io.github.freya022.botcommands.api.commands.annotations.Command
 import io.github.freya022.botcommands.api.commands.application.context.annotations.JDAMessageCommand
 import io.github.freya022.botcommands.api.commands.application.context.message.GlobalMessageEvent
-
 import net.dv8tion.jda.api.Permission
 import net.dv8tion.jda.api.components.actionrow.ActionRow
 import net.dv8tion.jda.api.components.buttons.Button
 import net.dv8tion.jda.api.entities.Message
 import net.dv8tion.jda.api.interactions.IntegrationType
 import net.dv8tion.jda.api.interactions.InteractionContextType
-
-import xyz.srnyx.lazylibrary.LazyEmoji
+import xyz.srnyx.lazylibrary.emoji.LazyEmoji
 import xyz.srnyx.lazylibrary.utility.LazyUtilities
 
 import java.io.BufferedReader
