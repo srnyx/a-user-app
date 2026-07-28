@@ -37,7 +37,7 @@ class PasteApp {
         integrationTypes = [IntegrationType.GUILD_INSTALL, IntegrationType.USER_INSTALL])
     fun pasteContext(event: GlobalMessageEvent) {
         if (event.channelId == null) return
-        if (!LazyUtilities.userHasChannelPermission(event, Permission.MESSAGE_SEND)) {
+        if (!event.isFromGuild && !LazyUtilities.userHasChannelPermission(event, Permission.MESSAGE_SEND)) {
             event.reply(LazyEmoji.NO.toString() + " You do not have permission to use this command in this channel!").setEphemeral(true).queue()
             return
         }
